@@ -2,8 +2,8 @@ import Container from "./Container";
 
 const Navbar = ({ setShow }) => {
   return (
-    <div className="bg-dark-200">
-      <Container className="flex bg-dark-200 flex-wrap gap-3 md:gap-7 md:pl-[320px] lg:pl-[18rem] justify-between items-center py-5 px-4">
+    <div className="bg-dark-200 md:pl-[320px] lg:pl-[18rem]">
+      <Container className="flex bg-dark-200 flex-wrap gap-3 md:gap-7 justify-between items-center py-5 px-4">
         <div className="flex items-center justify-between md:w-auto w-full">
           <h1 className="text-2xl font-medium text-white">Users</h1>
           <div
