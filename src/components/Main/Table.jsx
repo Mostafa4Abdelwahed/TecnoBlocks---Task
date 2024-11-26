@@ -322,7 +322,7 @@ export default function TableSection() {
         </Table>
       </div>
       {/* Table Footer */}
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center flex-wrap justify-center space-x-2 py-4">
         <div className="flex-1 text-sm text-white text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} rows selected.
@@ -347,8 +347,7 @@ export default function TableSection() {
             </SelectContent>
           </Select>
         </div>
-
-        <div className="space-x-2">
+        <div className="space-x-2 mt-3.5 md:mt-0">
           <Button
             className="bg-dark-100 border-[1px] border-transparent hover:border-white/50 hover:bg-dark-100"
             size="sm"
