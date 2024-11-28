@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
+import Favicon from "../../public/Favicon.png";
 import Logo from "/logo.png";
-import Navbar from "./Navbar";
+import { SidebarContext } from "../context/sidebarContext";
 
 const Sidebar = () => {
-  const [show, setShow] = useState(false);
+  const { show, setShow } = useContext(SidebarContext);
   const links = [
     {
       title: "Dashboard",
@@ -192,34 +193,41 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`xl:w-72 shadow-lg shadow-dark-100 z-50 w-80 transition-all fixed md:left-0 md:top-0 md:bottom-0 ${
-          show ? "left-0 top-0 bottom-0" : "-left-full"
+        className={`shadow-lg shadow-dark-100 z-50 transition-all h-full md:h-auto ${
+          show
+            ? "fixed left-0 top-0 bottom-0 lg:relative w-[300px] md:w-[350px]"
+            : "fixed lg:relative w-[70px]"
         } xl:p-4 border-gray-700 p-2 bg-dark-200 shadow-2xl flex-col justify-start items-start gap-5 inline-flex`}
       >
         {/* Header Logo */}
         <div className="w-full px-2.5 pt-4 justify-between items-center gap-2.5 inline-flex">
-          <img src={Logo} className="w-52 md:mx-auto" alt="logo" />
-          <a
+        <img
+            src={show ? Logo : Favicon}
+            className="w-52 md:mx-auto"
+            alt="logo"
+          />
+          <span
             onClick={() => {
               setShow(!show);
             }}
-            className="w-6 cursor-pointer block md:hidden h-6 relative text-white"
+            className="absolute cursor-pointer -right-5 top-16 text-white"
           >
             <svg
+              className={`bg-dark-100 hidden md:block p-px md:p-1.5 box-content rounded ${show && "rotate-180"}`}
+              xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 12 24"
             >
-              <g id="Menu">
-                <rect width="24" height="24" />
-                <path id="icon" d="M13 6H21M3 12H21M7 18H21" stroke="#fff" />
-              </g>
+              <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M10.157 12.711L4.5 18.368l-1.414-1.414l4.95-4.95l-4.95-4.95L4.5 5.64l5.657 5.657a1 1 0 0 1 0 1.414"
+              ></path>
             </svg>
-          </a>
+          </span>
         </div>
-        <div className="relative w-full mt-4">
+        <div className={`relative w-full my-2.5 ${!show && "hidden"}`}>
           <input
             className="bg-dark-100 w-full text-white border-[1px] pl-10 border-white/10 hover:border-gray-400 transition-colors rounded-md py-3 px-4 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
@@ -235,30 +243,31 @@ const Sidebar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
+        <div className={`bg-gray-500 mt-2 h-px w-full ${show && "hidden"}`} />
         {/* Links Section */}
-        <div className="w-full px-2.5 pt-3">
+        <div className="w-full px-2.5">
           <ul className="flex gap-7 flex-col">
-            {links?.map((link) => {
+            {links?.map((link, key) => {
               return (
-                <li>
+                <li key={key}>
                   <a href={link.href}>
                     <div
                       className={`${
                         link.active ? "text-primary" : "text-gray-400"
-                      } transition-all flex items-center justify-between rounded-lg`}
+                      } transition-all flex items-center ${
+                        show ? "justify-between" : "justify-center"
+                      } rounded-lg`}
                     >
                       <div className="h-5 gap-1.5 flex items-center">
                         <div className="relative">{link.icon}</div>
-                        <h2 className="text-base">{link.title}</h2>
+                        <h2 className={`text-base ${!show && "hidden"}`}>{link.title}</h2>
                       </div>
                       {link.arrow && (
-                        <svg
+                        <svg className={`${!show && "hidden"}`}
                           xmlns="http://www.w3.org/2000/svg"
                           width="0.5em"
                           height="1em"
@@ -280,7 +289,7 @@ const Sidebar = () => {
         </div>
       </div>
       {/* Navbar */}
-      <Navbar setShow={setShow} />
+      {/* <Navbar /> */}
     </>
   );
 };

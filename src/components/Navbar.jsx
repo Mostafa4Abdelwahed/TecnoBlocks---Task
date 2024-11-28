@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import Container from "./Container";
+import { SidebarContext } from "../context/sidebarContext";
 
-const Navbar = ({ setShow }) => {
+const Navbar = () => {
+  const {setShow} = useContext(SidebarContext)
   return (
-    <div className="bg-dark-200 md:pl-[320px] lg:pl-[18rem]">
+    <div className="bg-dark-200">
       <Container className="flex bg-dark-200 flex-wrap gap-3 md:gap-7 justify-between items-center py-5 px-4">
         <div className="flex items-center justify-between md:w-auto w-full">
           <h1 className="text-2xl font-medium text-white">Users</h1>
