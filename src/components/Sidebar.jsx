@@ -201,11 +201,21 @@ const Sidebar = () => {
       >
         {/* Header Logo */}
         <div className="w-full px-2.5 pt-4 justify-between items-center gap-2.5 inline-flex">
-        <img
-            src={show ? Logo : Favicon}
+        {
+          show ? 
+          <img
+            src={Logo}
             className="w-52 md:mx-auto"
             alt="logo"
           />
+          :
+          <img
+            src={Favicon}
+            className="w-52 md:mx-auto"
+            alt="logo"
+          />
+        }
+        
           <span
             onClick={() => {
               setShow(!show);
