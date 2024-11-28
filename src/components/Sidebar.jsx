@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Favicon from "../../public/Favicon.png";
+import Favicon from "../../public/favicon.png";
 import Logo from "/logo.png";
 import { SidebarContext } from "../context/sidebarContext";
 
